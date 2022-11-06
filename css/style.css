@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&display=swap');:root{
+    --bg: #131315;
+    --red: #FC6767;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: var(--bg);
+    background-image: url("../assets/bg.png");
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+}
+.logo{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    margin: 0 auto;
+    display: block;
+}
+.logo span{
+    color: var(--red)
+}
+.text-red{
+    color: var(--red);
+}
+.p-18{
+    padding: 5rem 0;
+}
+.heading h1{
+    font-size: 46px;
+    font-weight: 900;
+    margin: 1rem 0
+}
+.heading ul{
+    margin-bottom: 2rem;
+}
+.heading ul li{
+    font-family: 'Quicksand', sans-serif;
+}
+.btn{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    border-radius: 39px;
+    padding: 10px 15px;
+}
+.btn-join{
+    background-color: var(--red);
+
+}
+.card{
+    text-align: center;
+    background-color: #0E0E0E;
+    border-radius: 20px;
+    padding: 1rem;
+    width: 320px;
+    height: 357px;
+    margin: 0 auto;
+}
+.card h3{
+    font-size: 32px;
+    font-weight: 700;
+}
+.card img{
+    width: 199px;
+    margin: 0 auto;
+}
+.line-1{
+    position: relative;
+    top: 50%;
+    width: 24em;
+    margin: 10px auto;
+    border-right: 2px solid rgba(255,255,255,.75);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* Animation */
+.anim-typewriter{
+  animation: typewriter 3s steps(30) 1s 1 normal both,
+             blinkTextCursor 500ms steps(30) infinite normal;
+}
+@keyframes typewriter{
+  from{width: 0;}
+  to{width: 17em;}
+}
+@keyframes blinkTextCursor{
+  from{border-right-color: rgba(255,255,255,.75);}
+  to{border-right-color: transparent;}
+}
+label{
+    font-family: 'Quicksand', sans-serif;
+}
+footer{
+    margin: 4rem;
+    text-align: center;
+    font-weight: 700;
+}
+/* Only the scroll bar */
+::-webkit-scrollbar {
+    width: .5rem;
+    height: .5rem;
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 46%);
+}
+::-webkit-scrollbar-thumb:hover {
+   background:  rgb(255 255 255 / 15%);
+}
+
+/* Logout btn */ 
+.logout-btn{
+    margin-top: 0.5rem;
+    background: aliceblue;
+    color: black;
+    padding: 0.5rem 1rem;
+    font-weight: 500 !important;
+}
+.Account-menu{
+    font-size: large;
+    font-weight: 600;
+}
