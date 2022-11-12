@@ -6,6 +6,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/d70f8cdd06.js" crossorigin="anonymous"></script>
-    
+    <script>
+    function toggleModal(id) {
+        document.getElementById(id).classList.toggle('hidden')
+    }
+    </script>
 </head>
 <body>

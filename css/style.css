@@ -122,3 +122,27 @@ footer{
     font-size: large;
     font-weight: 600;
 }
+aside , .mainclass{
+    background-color: #0E0E0E;
+    border: 1px solid #FC6767;
+    border-radius: 15px;
+    margin: 1rem;
+    padding: 2rem;
+}
+aside h3{
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-size: larger;
+    font-weight: 700;
+}
+li.class {
+    list-style: disc;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight: 500;
+}
+li.branche{
+    list-style: none;
+    margin-left: 15px;
+    margin-top: 10px;
+}
