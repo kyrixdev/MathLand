@@ -191,61 +191,66 @@
         if(isset($_GET['Cours'])){
 
     ?>
-    <div class="my-4">
-        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-4 rounded-full" onclick="toggleModal('CourAjout')">Ajouter un cours</button>
-        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-4 rounded-full">Lister les cours</button>
-    </div>
     
     <!-- Ajout cours modal -->
-    <div class="fixed z-10 overflow-y-auto top-0 w-full left-0 hidden" id="CourAjout">
-        <div class="flex items-center justify-center min-height-100vh pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div class="fixed inset-0 transition-opacity">
-            <div class="absolute inset-0 bg-gray-900 opacity-75" />
-            </div>
-            <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-            <div class="inline-block align-center bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-            <div class="bg-black px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <label>Ajouter un cour</label>
+            <div class="">
+                <h3 class="text-lg font-bold">Ajouter un cour</h3>
+                <br>
+                <!-- The data encoding type, enctype, MUST be specified as below -->
+                <form enctype="multipart/form-data" method="POST">
+                    <label for="classes">Choissesez la class</label>  
+                    <select name="class_select">
+                        <option value="1ER">1ère année</option>
+                        <option value="2ECO">2ème année Economie et services</option>
+                        <option value="2SC">2ème année Sciences</option> 
+                        <option value="2SI">2ème année Technologie de l'informatique</option> 
+                        <option value="3ECO">3ème année Economie et Gestion</option> 
+                        <option value="3MA">3ème année Mathématiques</option> 
+                        <option value="3SC">3ème année Sc.Exprémentales</option> 
+                        <option value="3SI">3ème année Sc.Informatique</option> 
+                        <option value="3TE">3ème année Sc.Technique</option> 
+                        <option value="4ECO">4ème année Economie et Gestion</option> 
+                        <option value="4MA">4ème année Mathématiques</option> 
+                        <option value="4SC">4ème année Sc.Exprémentales</option> 
+                        <option value="4SI">4ème année Sc.Informatique</option> 
+                        <option value="4TE">4ème année Sc.Technique</option> 
+                    </select>
+                    <br>
 
-                <form name="add_file" method="post" enctype="multipart/form-data">
-                <input type="file" name="fileToUpload" id="fileToUpload">
-                <input type="submit" class="btn btn-info" value="Upload file" name="submit">
+                    <!-- Name of input element determines name in $_FILES array -->
+                    <input name="cours_file" type="file" /> 
+                    <br>
+                    <input type="submit" name="cours_upload" class="submit_btn" value="Ajouter une fichier" />  
                 </form>
+
                 <?php
-                $target_dir = "uploads/";
-                $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-                $uploadOk = 1;
-                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-                // Check if image file is a actual image or fake image
-                if(isset($_POST["submit"])) {
-                  $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-                  if($check !== false) {
-                    echo "File is an image - " . $check["mime"] . ".";
-                    $uploadOk = 1;
-                  } else {
-                    echo "File is not an image.";
-                    $uploadOk = 0;
-                  }
+                if (isset($_POST['cours_upload'])) {
+                    echo "<p>" . $_POST['cours_file'] . " => file input successfull</p>";
+                    $target_dir = "uploads/";   // Directory where the file is going to be placed
+                    $file_name = $_FILES['cours_file']['name'];     // The file name
+                    $file_tmp = $_FILES['cours_file']['tmp_name'];      // File in the PHP tmp folder      
+                    $date = date("Y-m-d H:i:s");    
+                    $class = $_POST['class_select'];                  
+                    if (move_uploaded_file($file_tmp, $target_dir . $file_name)) {          // Checks that file has been moved
+                        $query = "INSERT INTO `courses` (`name`, `class`, `date`) VALUES ( '$file_name', '$class', '$date')";
+                        if ($connection->query  ($query) === TRUE) {
+                            header('location: rooter.php?Cours&success');
+                        } else {
+                            echo "Error: " . $query . "<br>" . $connection->error;
+                        }       
+                    } else {    // If file was not moved.
+                        echo "no";
+                    }
                 }
                 ?>
             </div>
-            <div class="bg-black px-4 py-3 text-right">
-                <button type="button" class="py-2 px-4 bg-gray-500 text-white rounded hover:bg-gray-700 mr-2" onclick="toggleModal('CourAjout')"><i class="fas fa-times"></i> Cancel</button>
-            </div>
-            </div>
-        </div>
-        </div>
-    </div>
 
     <table class="border-collapse border border-spacing-2 ...">
     <thead>
         <tr>
         <th class="border px-3 py-1.5 border-rose-400 ...">id</th>
-        <th class="border px-3 py-1.5 border-rose-400 ...">Nom & Prenom</th>
-        <th class="border px-3 py-1.5 border-rose-400 ...">Email</th>
-        <th class="border px-3 py-1.5 border-rose-400 ...">n telephone</th>
-        <th class="border px-3 py-1.5 border-rose-400 ...">balance</th>
-        <th class="border px-3 py-1.5 border-rose-400 ...">Membre</th>
+        <th class="border px-3 py-1.5 border-rose-400 ...">Nom du fichier</th>
+        <th class="border px-3 py-1.5 border-rose-400 ...">Class</th>
         <th class="border px-3 py-1.5 border-rose-400 ..."></th>
 
         </tr>
@@ -253,7 +258,7 @@
     <tbody>
         <?php 
            //search
-           $sql = "SELECT * FROM users";
+           $sql = "SELECT * FROM courses";
            $result = mysqli_query($connection, $sql) or die("Failed to query database ".mysqli_error($connection));
            //compare
            if (mysqli_num_rows($result) > 0){
@@ -261,28 +266,35 @@
         ?>
         <tr>
         <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["id"]; ?></td>
-        <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["firstname"]." ".$row["lastname"]; ?></td>
-        <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["email"]; ?></td>
-        <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["mobilenumber"]; ?></td>
-        <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["balance"]; ?></td>
+        <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["name"]; ?></td>
+        <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["class"]; ?></td>
         <td class="border px-3 py-1.5 border-rose-400 ...">
-        <?php 
-        if ($row["is_active"]== 1){
-            echo "Oui";
-        }
-        else{
-            echo "Non";
-        }
-         ?>
-        </td>
+            <a href="uploads/<?php echo $row["name"]; ?>" download="<?php echo $row["name"]; ?>" class="text-white bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">Télécharger</a>
         <td class="border px-3 py-1.5 border-rose-400 ...">
-        <a href="#" class="text-amber-300">Gérer</a>
+        <a href='?Cours&delete=<?php echo $row["id"]; ?>' class="text-amber-300">Supprimer</a>    
+            <?php 
+            if(isset($_GET['delete'])) {
+                $id = $_GET["delete"];
+                $sql = "DELETE FROM courses WHERE id=$id";
+                if ($connection->query ($sql) === TRUE) {
+                    header("Location: rooter.php?Cours&delete=success");
+                } else {
+                    echo "Error deleting record: " . $connection->error;
+                }
+            }
+            ?>
         </td>
         </tr>
         <?php 
             }
             } else {
                 echo "0 results";
+            }
+            if(isset($_GET['success'])) {
+                echo "<p class='text-green-500 font-bold my-5'>Fichier ajouté avec succès</p>";
+            }
+            if(isset($_GET['delete']) && $_GET['delete'] == "success") {
+                echo "<p class='text-red-500 font-bold my-5'>Suppression réussie</p>";
             }
         ?>
     </tbody>
