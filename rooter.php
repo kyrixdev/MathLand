@@ -104,8 +104,9 @@
         <th class="border px-3 py-1.5 border-rose-400 ...">Nom & Prenom</th>
         <th class="border px-3 py-1.5 border-rose-400 ...">Email</th>
         <th class="border px-3 py-1.5 border-rose-400 ...">n telephone</th>
+        <th class="border px-3 py-1.5 border-rose-400 ...">Niveau</th>
         <th class="border px-3 py-1.5 border-rose-400 ...">balance</th>
-        <th class="border px-3 py-1.5 border-rose-400 ...">Membre</th>
+        <th class="border px-3 py-1.5 border-rose-400 ...">Membre</th>  
         <th class="border px-3 py-1.5 border-rose-400 ..."></th>
 
         </tr>
@@ -124,6 +125,7 @@
         <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["firstname"]." ".$row["lastname"]; ?></td>
         <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["email"]; ?></td>
         <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["mobilenumber"]; ?></td>
+        <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["level"]; ?></td>
         <td class="border px-3 py-1.5 border-rose-400 ..."><?php echo $row["balance"]; ?></td>
         <td class="border px-3 py-1.5 border-rose-400 ...">
         <?php 
@@ -200,6 +202,10 @@
                 <form enctype="multipart/form-data" method="POST">
                     <label for="classes">Choissesez la class</label>  
                     <select name="class_select">
+                        <option value="7EM">7 ème année</option>
+                        <option value="8EM">8 ème année</option>
+                        <option value="9EM">9 ème année</option>
+                        <option value="">---- Lycee ----</option>
                         <option value="1ER">1ère année</option>
                         <option value="2ECO">2ème année Economie et services</option>
                         <option value="2SC">2ème année Sciences</option> 

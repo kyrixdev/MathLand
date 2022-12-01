@@ -15,7 +15,7 @@
         <div class="w-64 text-center p-5 mt-1">
             <a href="logout.php" class="btn logout-btn"><i class="fas fa-sign-out-alt"></i> Log Out</a>
         </div>
-        <div class="logo text-center">MATH<span>LAND</span></div>
+        <div class="logo text-center"><a href="index.html">MATH<span>LAND</span></a></div>
         <div class="Account-menu w-64 m-4">
             <div class="flex flex-col">
                 <div>
@@ -28,13 +28,13 @@
                 $row = mysqli_fetch_array($result);
                 if (($row['email'] == $email) && ($row['id'] == $id)){
                     echo $row['firstname']." ".$row['lastname'];
-                
+            
                 ?>
                 </div>
                 <div>
                 <i class="fas fa-money-bill-wave"></i>
                 <?php 
-                    echo $row['balance'];
+                    echo $row['balance']." pts";
                 }
                 ?>
                 </div>
@@ -47,11 +47,24 @@
         </div>
         </header>
 
-
+<?php 
+if(isset($_GET['welcome'])){
+    echo "<div class='text-center bg-green-500 text-gray-900 font-semibold mx-5 rounded-lg p-4 text-2xl'>Bienvenu ".$_SESSION['UserName']."</div>";
+}
+?>
 <div class="flex flex-row">
     <aside class="flex-1 w-1/4">
         <h3>Choisissez Votre Classe</h3>
         <ul>
+            <?php 
+            if($row['level'] == 'College'){
+            ?>
+            <a href="home.php?Class=7EM"><li class="class">7 éme année</li></a>
+            <a href="home.php?Class=8EM"><li class="class">8 éme année</li></a>
+            <a href="home.php?Class=9EM"><li class="class">9 émé année</li></a>
+            <?php 
+            }else{
+            ?>
             <a href="home.php?Class=1ER"><li class="class">1 ere année</li></a>
             <li class="class">2 eme année</li>
                 <a href="home.php?Class=2ECO"><li class="branche">> Economie et services</li></a>
@@ -69,7 +82,9 @@
                 <a href="home.php?Class=4SC"><li class="branche">> Sc. Experimental</li></a>
                 <a href="home.php?Class=4SI"><li class="branche">> Sc. Informatique</li></a>
                 <a href="home.php?Class=4TE"><li class="branche">> Sc. Technique</li></a>
-
+                <?php 
+            }   
+            ?>
         </ul>
     </aside>
     <main class="mainclass flex-2 w-3/4">

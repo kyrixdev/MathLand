@@ -23,9 +23,10 @@
         if (($row['email'] == $email) && ($row['password'] == $password)){
             $_SESSION['id'] = $row['id'];
             $_SESSION['email'] = $row['email'];
+            $_SESSION['UserName'] = $row['firstname']." ".$row['lastname'];
             $_SESSION['UserLoggedIn'] = true;
 
-            header("Location: home.php");
+            header("Location: home.php?welcome");
         } else {
             header("Location: login.php?Error");
             die();

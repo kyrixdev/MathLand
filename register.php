@@ -51,12 +51,10 @@
 
         <div class="flex flex-row">
           <div class="basis-2/4">
-            <label for="class"><i class="fas fa-graduation-cap"></i> Votre Classe</label>
+            <label for="class"><i class="fas fa-graduation-cap"></i> Votre Niveau</label>
             <select name="class" required class="my-5 relative block w-3/4 appearance-none rounded-md border border-gray-300 px-3 py-2 bg-black text-white placeholder-gray-500 focus:z-10 focus:border-red-500 focus:outline-none focus:ring-red-500 sm:text-sm">
-                <option value="1 er année">1 er année</option>
-                <option value="2 émé année"><i class="fa fa-email"></i> 2 émé année</option>
-                <option value="3 émé année"><i class="fa fa-home"></i> 3 émé année</option>
-                <option value="4 émé année"><i class="fa fa-home"></i> 4 émé année</option>
+                <option value="College">Collége</option>
+                <option value="Lycee">Lycée</option>
             </select>
           </div>
           <div class="basis-2/4">
