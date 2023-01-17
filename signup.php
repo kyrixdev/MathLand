@@ -32,7 +32,7 @@
     if($numUsers > 0) {
         header('location: register.php?UserExist');
     }else{
-        $query= "INSERT INTO `users` (firstname, lastname, email, mobilenumber, password, is_active) VALUES ('$fname','$lname','$email','$phone','$password','$is_active')";
+        $query= "INSERT INTO `users` (firstname, lastname, email, mobilenumber, password, level, is_active) VALUES ('$fname','$lname','$email','$phone','$password','$class','$is_active')";
         if ($connection->query($query) === TRUE) {
             header('location: home.php');
         } else {

@@ -94,6 +94,86 @@ if(isset($_GET['welcome'])){
                 $sql = "SELECT * FROM `courses` WHERE `class` = '$Class'";
                 $result = mysqli_query($connection, $sql) or die("Failed to query database ".mysqli_error($connection));
                 if (mysqli_num_rows($result) > 0){
+                    echo "<h3 class='font-bold text-xl'>Les Cours</h3>";
+                while($row = mysqli_fetch_assoc($result)) {
+                ?>
+                <div class="course_card">
+                    <div class="course_card_img">
+                        <?php
+                        $fileType = explode('.', $row['name']);
+                        $fileActualExt = strtolower(end($fileType));
+                        if ($fileActualExt == 'doc' || $fileActualExt == 'docx'){
+                            echo "<img src='https://cdn-icons-png.flaticon.com/512/3997/3997559.png'/> ";
+
+                        }elseif ($fileActualExt == 'pdf'){
+                            echo "<img src='https://cdn-icons-png.flaticon.com/512/337/337946.png'/>";
+                        }
+                        else{
+                            echo "nothing";
+                        }
+                        ?>
+                    </div>
+                    <div class="course_card_name ">
+                        <h3><?php echo $row['name']; ?></h3>
+                    </div>
+                    <div class="course_card_btn">
+                    <a href="uploads/<?php echo $row["name"]; ?>" download="<?php echo $row["name"]; ?>" class="text-white bg-red-500 hover:bg-red-700 rounded px-3 py-2">Télécharger</a>
+                    </div>
+                </div>
+        
+        <?php
+                }
+            }
+        }
+        ?>
+
+
+<?php 
+            if(isset($_GET['Class'])){
+                $Class = $_GET['Class'];
+                $sql = "SELECT * FROM `Exercices` WHERE `class` = '$Class'";
+                $result = mysqli_query($connection, $sql) or die("Failed to query database ".mysqli_error($connection));
+                if (mysqli_num_rows($result) > 0){
+                echo "<h3 class='font-bold text-xl'>Les Exercices</h3>";
+                while($row = mysqli_fetch_assoc($result)) {
+                ?>
+                <div class="course_card">
+                    <div class="course_card_img">
+                        <?php
+                        $fileType = explode('.', $row['name']);
+                        $fileActualExt = strtolower(end($fileType));
+                        if ($fileActualExt == 'doc' || $fileActualExt == 'docx'){
+                            echo "<img src='https://cdn-icons-png.flaticon.com/512/3997/3997559.png'/> ";
+
+                        }elseif ($fileActualExt == 'pdf'){
+                            echo "<img src='https://cdn-icons-png.flaticon.com/512/337/337946.png'/>";
+                        }
+                        else{
+                            echo "nothing";
+                        }
+                        ?>
+                    </div>
+                    <div class="course_card_name ">
+                        <h3><?php echo $row['name']; ?></h3>
+                    </div>
+                    <div class="course_card_btn">
+                    <a href="uploads/<?php echo $row["name"]; ?>" download="<?php echo $row["name"]; ?>" class="text-white bg-red-500 hover:bg-red-700 rounded px-3 py-2">Télécharger</a>
+                    </div>
+                </div>
+        
+        <?php
+                }
+            }
+        }
+        ?>
+
+<?php 
+            if(isset($_GET['Class'])){
+                $Class = $_GET['Class'];
+                $sql = "SELECT * FROM `Devoirs` WHERE `class` = '$Class'";
+                $result = mysqli_query($connection, $sql) or die("Failed to query database ".mysqli_error($connection));
+                if (mysqli_num_rows($result) > 0){
+                    echo "<h3 class='font-bold text-xl'>Les Devoirs</h3>";
                 while($row = mysqli_fetch_assoc($result)) {
                 ?>
                 <div class="course_card">
@@ -127,3 +207,5 @@ if(isset($_GET['welcome'])){
         ?>
     </main>
 </div>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7336531457615064"
+     crossorigin="anonymous"></script>

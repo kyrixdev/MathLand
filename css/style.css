@@ -182,3 +182,25 @@ form select{
 .course_card_img img{
     width: 50px;
 }
+.testimonies-card{ 
+    background: white;
+    color: black;
+    margin: 0 2rem;
+    padding: 1rem;
+    border-radius: 15px;
+}
+.testimonies-card-header{
+    display: flex;
+    margin-bottom: 1rem;
+}
+.testimonies-card-header img{
+    width: 50px;
+    border-radius: 50%;
+}
+.testimonies-card-header-info{
+    margin: 0 1rem;
+}
+.testimonies-card-header-info h3{
+    font-size: 1rem;
+    font-weight: 700;
+}
