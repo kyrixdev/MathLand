@@ -10,7 +10,7 @@
           }
 ?>
 <div class="container-full">
-<div class="flex min-h-lg items-center justify-center px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col lg:flex-row min-h-lg items-center justify-center px-4 sm:px-6 lg:px-8">
   <div class="w-full max-w-lg space-y-8">
     <div>
         <a href="index.html" class="logo text-center">MATH<span>LAND</span></a>

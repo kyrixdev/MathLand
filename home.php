@@ -11,8 +11,8 @@
       $email = $_SESSION['email'];
       $id = $_SESSION['id'];
 ?>
-    <header class="my-4 flex flex-row ">
-        <div class="w-64 text-center p-5 mt-1">
+    <header class="my-4 flex flex-col justify-center lg:flex-row ">
+        <div class="w-64 text-center self-center lg:self-auto p-5 mt-1">
             <a href="logout.php" class="btn logout-btn"><i class="fas fa-sign-out-alt"></i> Log Out</a>
         </div>
         <div class="logo text-center"><a href="index.html">MATH<span>LAND</span></a></div>
@@ -52,8 +52,8 @@ if(isset($_GET['welcome'])){
     echo "<div class='text-center bg-green-500 text-gray-900 font-semibold mx-5 rounded-lg p-4 text-2xl'>Bienvenu ".$_SESSION['UserName']."</div>";
 }
 ?>
-<div class="flex flex-row">
-    <aside class="flex-1 w-1/4">
+<div class="flex flex-col lg:flex-row">
+    <aside class="flex-1 w-auto lg:w-1/4">
         <h3>Choisissez Votre Classe</h3>
         <ul>
             <?php 
@@ -87,7 +87,7 @@ if(isset($_GET['welcome'])){
             ?>
         </ul>
     </aside>
-    <main class="mainclass flex-2 w-3/4">
+    <main class="mainclass flex-2 w-auto lg:w-3/4">
         <?php 
             if(isset($_GET['Class'])){
                 $Class = $_GET['Class'];
@@ -97,7 +97,7 @@ if(isset($_GET['welcome'])){
                     echo "<h3 class='font-bold text-xl'>Les Cours</h3>";
                 while($row = mysqli_fetch_assoc($result)) {
                 ?>
-                <div class="course_card">
+                <div class="course_card ">
                     <div class="course_card_img">
                         <?php
                         $fileType = explode('.', $row['name']);
