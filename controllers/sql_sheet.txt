@@ -9,7 +9,3 @@ CREATE TABLE `users` (
   `is_active` enum('0','1') NOT NULL,
   `date_time` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-        <?php 
-
-        ?>

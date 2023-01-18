@@ -48,7 +48,7 @@
             <a href="?Users"><li class="class">Liste des utilisateurs</li></a>
             <a href="?Cours"><li class="class">Gérer les cours</li></a>
             <a href="?Exercices"><li class="class">Gérer les exercices</li></a>
-            <a href="?Devoir"><li class="class">Gérer les devoirs</li></a>
+            <a href="?Devoirs"><li class="class">Gérer les devoirs</li></a>
 
         </ul>
     </aside>
@@ -190,7 +190,7 @@
     <?php } //Users list ?>
 
 
-    <!-- Coues Part -->
+    <!-- Cours Part -->
     <?php 
         if(isset($_GET['Cours'])){
 
@@ -279,12 +279,14 @@
         <td class="border px-3 py-1.5 border-rose-400 ...">
             <a href="uploads/<?php echo $row["name"]; ?>" download="<?php echo $row["name"]; ?>" class="text-white bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">Télécharger</a>
         <td class="border px-3 py-1.5 border-rose-400 ...">
-        <a href='?Cours&delete=<?php echo $row["id"]; ?>' class="text-amber-300">Supprimer</a>    
+        <a href='?Cours&delete=<?php echo $row["id"]; ?>&file_name=<?php echo $row["name"]; ?>' class="text-amber-300">Supprimer</a>    
             <?php 
-            if(isset($_GET['delete'])) {
+            if(isset($_GET['delete']) && $_GET['delete'] != "success"){
                 $id = $_GET["delete"];
+                $file_name = $_GET["file_name"];
                 $sql = "DELETE FROM courses WHERE id=$id";
                 if ($connection->query ($sql) === TRUE) {
+                    unlink("uploads/".$file_name);
                     header("Location: rooter.php?Cours&delete=success");
                 } else {
                     echo "Error deleting record: " . $connection->error;
@@ -399,13 +401,15 @@
         <td class="border px-3 py-1.5 border-rose-400 ...">
             <a href="uploads/<?php echo $row["name"]; ?>" download="<?php echo $row["name"]; ?>" class="text-white bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">Télécharger</a>
         <td class="border px-3 py-1.5 border-rose-400 ...">
-        <a href='?Cours&delete=<?php echo $row["id"]; ?>' class="text-amber-300">Supprimer</a>    
+        <a href='?Exercices&delete=<?php echo $row["id"]; ?>&file_name=<?php echo $row["name"]; ?>' class="text-amber-300">Supprimer</a>    
             <?php 
-            if(isset($_GET['delete'])) {
+            if(isset($_GET['delete'])  && $_GET['delete'] != "success") {
                 $id = $_GET["delete"];
-                $sql = "DELETE FROM courses WHERE id=$id";
+                $file_name = $_GET["file_name"];
+                $sql = "DELETE FROM Exercices WHERE id=$id";
                 if ($connection->query ($sql) === TRUE) {
-                    header("Location: rooter.php?Cours&delete=success");
+                    unlink("uploads/".$file_name);
+                    header("Location: rooter.php?Exercices&delete=success");
                 } else {
                     echo "Error deleting record: " . $connection->error;
                 }
@@ -431,7 +435,7 @@
 
        <!-- Devoirs Part -->
        <?php 
-        if(isset($_GET['Devoir'])){
+        if(isset($_GET['Devoirs'])){
 
     ?>
     
@@ -474,10 +478,10 @@
                 if (isset($_POST['devoir_upload'])) {
                     echo "<p>" . $_POST['devoir_file'] . " => file input successfull</p>";
                     $target_dir = "uploads/";   // Directory where the file is going to be placed
-                    $file_name = $_FILES['exercice_file']['name'];     // The file name
-                    $file_tmp = $_FILES['exercice_file']['tmp_name'];      // File in the PHP tmp folder      
+                    $file_name = $_FILES['devoir_file']['name'];     // The file name
+                    $file_tmp = $_FILES['devoir_file']['tmp_name'];      // File in the PHP tmp folder      
                     $date = date("Y-m-d H:i:s");    
-                    $class = $_POST['exercice_select'];                  
+                    $class = $_POST['devoir_select'];                  
                     if (move_uploaded_file($file_tmp, $target_dir . $file_name)) {          // Checks that file has been moved
                         $query = "INSERT INTO `Devoirs` (`name`, `class`, `date`) VALUES ( '$file_name', '$class', '$date')";
                         if ($connection->query  ($query) === TRUE) {
@@ -505,7 +509,7 @@
     <tbody>
         <?php 
            //search
-           $sql = "SELECT * FROM Exercices";
+           $sql = "SELECT * FROM `Devoirs`";
            $result = mysqli_query($connection, $sql) or die("Failed to query database ".mysqli_error($connection));
            //compare
            if (mysqli_num_rows($result) > 0){
@@ -518,13 +522,15 @@
         <td class="border px-3 py-1.5 border-rose-400 ...">
             <a href="uploads/<?php echo $row["name"]; ?>" download="<?php echo $row["name"]; ?>" class="text-white bg-blue-500 hover:bg-blue-700 rounded px-2 py-1">Télécharger</a>
         <td class="border px-3 py-1.5 border-rose-400 ...">
-        <a href='?Cours&delete=<?php echo $row["id"]; ?>' class="text-amber-300">Supprimer</a>    
+        <a href='?Devoirs&delete=<?php echo $row["id"]; ?>&file_name=<?php echo $row["name"]; ?>' class="text-amber-300">Supprimer</a>    
             <?php 
-            if(isset($_GET['delete'])) {
+            if(isset($_GET['delete'])  && $_GET['delete'] != "success") {
                 $id = $_GET["delete"];
-                $sql = "DELETE FROM courses WHERE id=$id";
+                $file_name = $_GET["file_name"];
+                $sql = "DELETE FROM `Devoirs` WHERE id=$id";
                 if ($connection->query ($sql) === TRUE) {
-                    header("Location: rooter.php?Cours&delete=success");
+                    unlink("uploads/".$file_name);
+                    header("Location: rooter.php?Devoirs&delete=success");
                 } else {
                     echo "Error deleting record: " . $connection->error;
                 }
